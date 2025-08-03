@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DSA Tutorials</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f4037;
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      color: #b2ff59;
+      margin-bottom: 1rem;
+    }
+
+    .video-container, .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    video, img {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .media-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 480px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      color: #a5d6a7;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-btn:hover {
+      color: #b2ff59;
+    }
+
+    a.download-link {
+      display: block;
+      margin-top: 0.5rem;
+      color: #b2ff59;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a.download-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📚 DSA Tutorials</h1>
+  <p>These videos demonstrate Digital Subtraction Angiography in action.</p>
+
+  <h2>🎥 DSA Video Demonstrations</h2>
+  <div class="video-container">
+    <div class="media-block">
+      <video controls>
+        <source src="{{ url_for('static', filename='tutorials/4.mp4') }}" type="video/mp4">
+        Your browser does not support .mp4 playback.
+      </video>
+      <a class="download-link" href="{{ url_for('static', filename='tutorials/4.mp4') }}" download>📥 Download 4.mp4</a>
+    </div>
+
+    <div class="media-block">
+      <video controls>
+        <source src="{{ url_for('static', filename='tutorials/16.mp4') }}" type="video/mp4">
+        Your browser does not support .mp4 playback.
+      </video>
+      <a class="download-link" href="{{ url_for('static', filename='tutorials/16.mp4') }}" download>📥 Download 16.mp4</a>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 3rem;">🖼️ Sample TIFF Scans</h2>
+  <div class="image-container">
+    <div class="media-block">
+      <img src="{{ url_for('static', filename='tutorials/6.tiff') }}" alt="TIFF Scan Example" />
+      <a class="download-link" href="{{ url_for('static', filename='tutorials/6.tiff') }}" download>📥 Download 6.tiff</a>
+    </div>
+
+    <div class="media-block">
+      <img src="{{ url_for('static', filename='tutorials/13.tiff') }}" alt="TIFF Scan Example" />
+      <a class="download-link" href="{{ url_for('static', filename='tutorials/13.tiff') }}" download>📥 Download 13.tiff</a>
+    </div>
+  </div>
+
+  <a href="{{ url_for('dashboard') }}" class="back-btn">← Back to Dashboard</a>
+
+</body>
+</html>

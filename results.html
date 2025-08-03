@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DSA Simulation Results</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f4037;
+      color: white;
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      color: #b2ff59;
+      text-align: center;
+    }
+    .images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .images div {
+      text-align: center;
+    }
+    .images img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 2px solid #81c784;
+    }
+    nav {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    nav a {
+      color: #a5d6a7;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #b2ff59;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('home') }}">Home</a> |
+    <a href="{{ url_for('about') }}">About</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </nav>
+
+  <h1>DSA Simulation Results</h1>
+
+  <div class="images">
+    <div>
+      <h3>Mask Image</h3>
+      <img src="{{ url_for('static', filename='results/mask.jpeg') }}" alt="Mask Image" />
+    </div>
+    <div>
+      <h3>Contrast Image</h3>
+      <img src="{{ url_for('static', filename='results/contrast.jpeg') }}" alt="Contrast Image" />
+    </div>
+    <div>
+      <h3>Subtracted Image</h3>
+      <img src="{{ url_for('static', filename='results/subtracted_result.jpeg') }}" alt="Subtracted Image" />
+    </div>
+    <div>
+      <h3>Vessel Edges</h3>
+      <img src="{{ url_for('static', filename='results/vessels_edges.jpeg') }}" alt="Vessel Edges" />
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top: 2rem;">
+    <a href="{{ url_for('static', filename='results/subtracted_result.jpeg') }}" download><button>Download Subtracted Image</button></a>
+    <a href="{{ url_for('static', filename='results/vessels_edges.jpeg') }}" download><button>Download Vessel Edges</button></a>
+  </div>
+</body>
+</html>

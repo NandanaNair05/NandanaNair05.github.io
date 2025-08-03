@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About DSA Visualizer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f4037;
+      color: white;
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      color: #b2ff59;
+      text-align: center;
+    }
+    nav {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    nav a {
+      color: #a5d6a7;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #b2ff59;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('home') }}">Home</a> |
+    <a href="{{ url_for('about') }}">About</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </nav>
+
+  <h1>About DSA Visualizer</h1>
+
+  <p>
+    This tool simulates Digital Subtraction Angiography using uploaded mask and contrast images.
+    It applies image processing techniques to visualize vessel structures for educational and diagnostic purposes.
+  </p>
+
+  <p>
+    Developed by Nandana.P (E0524011) as part of a medical engineering internship project.
+  </p>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scan History</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            padding: 30px;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Scan History</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Timestamp</th>
+                <th>Mask Image</th>
+                <th>Contrast Image</th>
+                <th>Result Image</th>
+                <th>Edge Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for scan in scans %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') if scan.timestamp else 'N/A' }}</td>
+                
+                <td>
+                    {% if scan.mask_path %}
+                        <a href="{{ url_for('static', filename=scan.mask_path) }}" target="_blank">View</a>
+                    {% else %} N/A {% endif %}
+                </td>
+                
+                <td>
+                    {% if scan.contrast_path %}
+                        <a href="{{ url_for('static', filename=scan.contrast_path) }}" target="_blank">View</a>
+                    {% else %} N/A {% endif %}
+                </td>
+                
+                <td>
+                    {% if scan.result_path %}
+                        <a href="{{ url_for('static', filename=scan.result_path) }}" target="_blank">View</a>
+                    {% else %} N/A {% endif %}
+                </td>
+                
+                <td>
+                    {% if scan.edge_path %}
+                        <a href="{{ url_for('static', filename=scan.edge_path) }}" target="_blank">View</a>
+                    {% else %} N/A {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="text-align: center;">
+        <a href="{{ url_for('home') }}" class="btn-back">Back to Dashboard</a>
+    </div>
+
+</body>
+</html>

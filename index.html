@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DSA Visualizer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f4037, #1b5e20);
+      color: #fff;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #b2ff59;
+    }
+    nav {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    nav a {
+      color: #a5d6a7;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: #b2ff59;
+    }
+    form {
+      background: rgba(255,255,255,0.1);
+      padding: 2rem;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    input, button {
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+    input[type="file"] {
+      background: #fff;
+      color: #000;
+    }
+    button {
+      background: #43a047;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #66bb6a;
+    }
+    .grid {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .grid div {
+      text-align: center;
+    }
+    .grid img {
+      max-width: 100%;
+      border-radius: 6px;
+      border: 2px solid #81c784;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #a5d6a7;
+    }
+    /* Clear Results Button */
+    .clear-results-btn {
+      background: #e53935;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 2rem auto 0;
+      display: block;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .clear-results-btn:hover {
+      background: #f44336;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a> |
+    <a href="{{ url_for('about') }}">About</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </nav>
+
+  <h1>DSA Visualizer</h1>
+  <p style="text-align: center;">Interactive Vascular Imaging for Medical Learning & Diagnosis</p>
+
+  <form method="POST" action="{{ url_for('upload_files') }}" enctype="multipart/form-data">
+    <label>Upload Mask Image:</label>
+    <input type="file" name="mask" accept="image/*" required />
+    <label>Upload Contrast Image:</label>
+    <input type="file" name="contrast" accept="image/*" required />
+    <button type="submit">Run DSA Simulation</button>
+  </form>
+
+  <h2 style="margin-top: 3rem;">Simulation Results</h2>
+  <div class="grid">
+    <div>
+      <p>Mask Image</p>
+      {% if scan %}
+        <img src="{{ url_for('static', filename='results/' + scan.mask_path) }}" alt="Mask Image" />
+      {% else %}
+        <p>No results yet.</p>
+      {% endif %}
+    </div>
+    <div>
+      <p>Contrast Image</p>
+      {% if scan %}
+        <img src="{{ url_for('static', filename='results/' + scan.contrast_path) }}" alt="Contrast Image" />
+      {% endif %}
+    </div>
+    <div>
+      <p>Subtracted Image</p>
+      {% if scan %}
+        <img src="{{ url_for('static', filename='results/' + scan.result_path) }}" alt="Subtracted Image" />
+      {% endif %}
+    </div>
+    <div>
+      <p>Vessel Edges</p>
+      {% if scan %}
+        <img src="{{ url_for('static', filename='results/' + scan.edge_path) }}" alt="Vessel Edges" />
+      {% endif %}
+    </div>
+  </div>
+
+  {% if scan %}
+  <div style="text-align:center; margin-top: 1rem;">
+    <a href="{{ url_for('static', filename='results/' + scan.result_path) }}" download><button>Download Subtracted Image</button></a>
+    <a href="{{ url_for('static', filename='results/' + scan.edge_path) }}" download><button>Download Vessel Edges</button></a>
+  </div>
+  {% endif %}
+
+  <!-- Clear Results Form -->
+  <form method="POST" action="{{ url_for('clear_results') }}">
+    <button type="submit" class="clear-results-btn">Clear All Results</button>
+  </form>
+
+  <div class="footer">
+    <p>© 2025 Nandyy | Powered by Medical Engineering</p>
+  </div>
+</div>
+
+</body>
+</html>
